@@ -19,6 +19,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Spliterator;
@@ -221,6 +222,39 @@ public class StreamTest {
         sb.setLength(0);
         Stream.concat(Stream.of(1, 2), Stream.of(3, 4, 5)).skip(3).forEach(appendNumbersTo(sb));
         assertEquals("4;5;", sb.toString());
+    }
+
+    @Test
+    public void concatAndIterateThroughIterator() {
+        StringBuilder sb = new StringBuilder();
+        Consumer<Integer> integerConsumer = appendNumbersTo(sb);
+        Iterator<Integer> iterator = Stream.concat(Stream.of(1, 2), Stream.of(3, 4)).iterator();
+
+        while (iterator.hasNext()) {
+            integerConsumer.accept(iterator.next());
+        }
+
+        assertEquals("1;2;3;4;", sb.toString());
+    }
+
+    @Test
+    public void streamOverSpliterator() {
+        StringBuilder sb = new StringBuilder();
+        Consumer<Integer> integerConsumer = appendNumbersTo(sb);
+        Iterator<Integer> iterator = Arrays.asList(1, 2).stream().iterator();
+
+        while (iterator.hasNext()) {
+            integerConsumer.accept(iterator.next());
+        }
+
+        assertEquals("1;2;", sb.toString());
+    }
+
+    @Test
+    public void boxedStream() {
+        StringBuilder sb = new StringBuilder();
+        IntStream.rangeClosed(1, 4).boxed().forEach(appendNumbersTo(sb));
+        assertEquals("1;2;3;4;", sb.toString());
     }
 
     @Test
