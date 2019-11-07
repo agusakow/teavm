@@ -54,6 +54,12 @@ public class SimpleDateFormatTest {
     }
 
     @Test
+    public void fieldsParsedWithoutDelimiters() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyMMddHHmm", Locale.ENGLISH);
+        assertEquals(1403602380000L, getTimeWithoutZoneOffset(format.parse("1406240933")));
+    }
+
+    @Test
     public void eraHandled() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("G yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
         assertEquals("AD 2014-06-24 09:33:49", format.format(getDateWithZoneOffset(1403602429504L)));
