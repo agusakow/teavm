@@ -24,7 +24,7 @@
   </parent>
   <artifactId>teavm-samples-kotlin</artifactId>
 
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>TeaVM Kotlin web application</name>
   <description>A sample application written in Kotlin and compiled by TeaVM</description>

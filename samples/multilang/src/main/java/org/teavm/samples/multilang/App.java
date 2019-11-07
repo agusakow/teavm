@@ -1,5 +1,5 @@
 /*
- *  Copyright 2016 konsoletyper.
+ *  Copyright 2019 jetbrains.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -13,10 +13,17 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package org.teavm.samples.multilang;
 
-package org.teavm.samples.kotlin
+import org.teavm.samples.kotlin.ConsoleHelloKt;
 
-fun main(args : Array<String>) {
-    val runnable = { println("Hello from Kotlin") }
-    runnable()
+public final class App {
+    public static void main(String[] args) {
+        ConsoleHelloKt.main(new String[] {});
+        String initial = "my initial string".replace("initial", "");
+        System.out.println(initial);
+    }
+
+    private App() {
+    }
 }
